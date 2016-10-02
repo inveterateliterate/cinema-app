@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# cinema-app
+Movie 
+>>>>>>> c8da62938dad86cd4b72af67b07c0c08443006a3
