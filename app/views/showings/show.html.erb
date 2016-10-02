@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @showing.date %>
+</p>
+
+<p>
+  <strong>Showtime:</strong>
+  <%= @showing.showtime %>
+</p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= @showing.movie %>
+</p>
+
+<p>
+  <strong>Auditorium:</strong>
+  <%= @showing.auditorium %>
+</p>
+
+<p>
+  <strong>Avail seats:</strong>
+  <%= @showing.avail_seats %>
+</p>
+
+<%= link_to 'Edit', edit_showing_path(@showing) %> |
+<%= link_to 'Back', showings_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @order.date %>
+</p>
+
+<p>
+  <strong>Cust last:</strong>
+  <%= @order.cust_last %>
+</p>
+
+<p>
+  <strong>Cust first:</strong>
+  <%= @order.cust_first %>
+</p>
+
+<p>
+  <strong>Cust email:</strong>
+  <%= @order.cust_email %>
+</p>
+
+<p>
+  <strong>Showing:</strong>
+  <%= @order.showing %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

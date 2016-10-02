@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-10-02
+  cust_last: MyString
+  cust_first: MyString
+  cust_email: MyString
+  showing: one
+
+two:
+  date: 2016-10-02
+  cust_last: MyString
+  cust_first: MyString
+  cust_email: MyString
+  showing: two

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-10-02
+  showtime: 2016-10-02 17:04:36
+  movie: one
+  auditorium: one
+  avail_seats: 1
+
+two:
+  date: 2016-10-02
+  showtime: 2016-10-02 17:04:36
+  movie: two
+  auditorium: two
+  avail_seats: 1

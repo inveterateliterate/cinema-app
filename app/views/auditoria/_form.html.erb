@@ -1,0 +1,22 @@
+<%= form_for(auditorium) do |f| %>
+  <% if auditorium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(auditorium.errors.count, "error") %> prohibited this auditorium from being saved:</h2>
+
+      <ul>
+      <% auditorium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :capacity %>
+    <%= f.number_field :capacity %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
