@@ -1,11 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Orders</h1>
+<h1>Order History</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Date</th>
       <th>Cust last</th>
       <th>Cust first</th>
       <th>Cust email</th>
@@ -17,7 +14,6 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.date %></td>
         <td><%= order.cust_last %></td>
         <td><%= order.cust_first %></td>
         <td><%= order.cust_email %></td>

@@ -1,7 +1,9 @@
 <%= form_for(movie) do |f| %>
   <% if movie.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+    <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <label><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</label>
 
       <ul>
       <% movie.errors.full_messages.each do |message| %>
@@ -9,29 +11,62 @@
       <% end %>
       </ul>
     </div>
+    </div>
+  <% end %>  
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
+  <div class="container">
+  <div class="form-group">
+  <%= form_for(@movie, multipart: true) do |f| %>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="title">Title</label>
+    </div>
+  <div class="col-xs-2">
     <%= f.text_field :title %>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-xs-2">
+      <label for="runtime">Runtime (min)</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.text_field :runtime %>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-xs-2">
+      <label for="description">Description</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.text_area :description %>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-xs-2">
+      <label for="select" class="control-label">Rating</label>
+        </div>
+        <div class="col-xs-2">
+        <%= select_tag(:rating, options_for_select([['G', 'G'], ['PG', 'PG'], ['PG13', 'PG13'],['R','R']])) %>
+        </div>
+      </div>
+
+  
+<div class="row">
+  <div class="col-xs-2">
+    <button><%= link_to 'Back', movies_path %></button>
+  </div>
+    <div class="col-xs-2">
+      <%= f.submit "Submit" %> 
+    </div>   
   </div>
 
-  <div class="field">
-    <%= f.label :runtime %>
-    <%= f.number_field :runtime %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= f.label :rating %>
-    <%= f.text_field :rating %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
 <% end %>
+
+</div>
+</div>

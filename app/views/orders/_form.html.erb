@@ -1,7 +1,9 @@
 <%= form_for(order) do |f| %>
   <% if order.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+    <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <label><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</label>
 
       <ul>
       <% order.errors.full_messages.each do |message| %>
@@ -9,34 +11,95 @@
       <% end %>
       </ul>
     </div>
+    </div>
+  <% end %>  
   <% end %>
 
-  <div class="field">
-    <%= f.label :date %>
-    <%= f.date_select :date %>
-  </div>
+  
 
-  <div class="field">
-    <%= f.label :cust_last %>
-    <%= f.text_field :cust_last %>
-  </div>
+<div class="container">
+  <div class="form-group">
+  <%= form_for(@order, multipart: true) do |f| %>
+  <%= f.hidden_field :showing_id, value: "temporary" %>
 
-  <div class="field">
-    <%= f.label :cust_first %>
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="cust_first">First Name</label>
+    </div>
+  <div class="col-xs-2">
     <%= f.text_field :cust_first %>
-  </div>
+    </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :cust_email %>
+ <div class="row">
+    <div class="col-xs-2">
+      <label for="cust_last">Last Name</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.text_field :cust_last %>
+    </div>
+    </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="cust_email">Email</label>
+    </div>
+  <div class="col-xs-2">
     <%= f.text_field :cust_email %>
+    </div>
+    </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="credit_card">Credit Card Number</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.number_field :cc_num  %>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-xs-2">
+      <label for="credit_card">Credit Card Expiration Date</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.date_field :cc_exp %>
+    </div>
+    </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="sale">Price</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.number_field :sale %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :showing_id %>
-    <%= f.text_field :showing_id %>
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="select" class="control-label">Quantity</label>
+        </div>
+        <div class="col-xs-2">
+        <select class="form-control" id="select">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+        </div>
+      </div>
+
+
+<div class="row">
+  <div class="col-xs-2">
+    <button><%= link_to 'Back', orders_path %></button>
+  </div>
+    <div class="col-xs-2">
+      <%= f.submit "Purchase" %> 
+    </div>   
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<%end%>
+</div>
+</div>

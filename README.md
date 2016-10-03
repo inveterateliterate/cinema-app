@@ -1,29 +1,5 @@
-<<<<<<< HEAD
-# README
+Movie Theater
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application designed to allow customers to push tickets to movies at the given cinema.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-=======
-# cinema-app
-Movie 
->>>>>>> c8da62938dad86cd4b72af67b07c0c08443006a3
+Additionally, theater management can use the app to manage scheduling of movies and auditorium capacity, as well as track ticket purchase history.
