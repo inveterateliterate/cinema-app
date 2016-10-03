@@ -51,10 +51,19 @@
       <label for="select" class="control-label">Rating</label>
         </div>
         <div class="col-xs-2">
-        <%= select_tag(:rating, options_for_select([['G', 'G'], ['PG', 'PG'], ['PG13', 'PG13'],['R','R']])) %>
+        <%= f.select :rating, [['G', 'G'], ['PG', 'PG'], ['PG-13', 'PG-13'],['R','R']] %>
         </div>
       </div>
 
+
+<div class="row">
+    <div class="col-xs-2">
+      <label for="movie-image">Poster</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.file_field :image %>
+    </div>
+    </div>
   
 <div class="row">
   <div class="col-xs-2">

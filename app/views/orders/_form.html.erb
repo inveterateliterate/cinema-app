@@ -19,9 +19,9 @@
 
 <div class="container">
   <div class="form-group">
-  <%= form_for(@order, multipart: true) do |f| %>
-  <%= f.hidden_field :showing_id, value: "temporary" %>
-
+  <%= form_for(@order) do |f| %>
+  <%= f.hidden_field :showing_id, value: @showing.id %>
+<%= f.hidden_field :sale, value: @price %>
   <div class="row">
     <div class="col-xs-2">
       <label for="cust_first">First Name</label>
@@ -54,7 +54,7 @@
       <label for="credit_card">Credit Card Number</label>
     </div>
   <div class="col-xs-2">
-    <%= f.number_field :cc_num  %>
+    <%= f.text_field :cc_num  %>
     </div>
     </div>
 
@@ -72,7 +72,7 @@
       <label for="sale">Price</label>
     </div>
   <div class="col-xs-2">
-    <%= f.number_field :sale %>
+       <label for="sale">$8.00</label>
     </div>
   </div>
 

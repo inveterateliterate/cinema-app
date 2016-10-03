@@ -1,7 +1,9 @@
 <%= form_for(showing) do |f| %>
   <% if showing.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(showing.errors.count, "error") %> prohibited this showing from being saved:</h2>
+    <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <label><%= pluralize(showing.errors.count, "error") %> prohibited this showing from being saved:</label>
 
       <ul>
       <% showing.errors.full_messages.each do |message| %>
@@ -10,33 +12,73 @@
       </ul>
     </div>
   <% end %>
+ <% end %>
 
-  <div class="field">
-    <%= f.label :date %>
-    <%= f.date_select :date %>
+
+<div class="container">
+  <div class="form-group">
+  <%= form_for(@showing) do |f| %>
+  
+
+
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="date">Date</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.date_field :date %>
+    </div>
+    </div>
+
+     <div class="row">
+    <div class="col-xs-2">
+      <label for="showtime">Showtime</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.time_field :showtime %>
+    </div>
+    </div>
+
+
+  <div class="row">
+    <div class="col-xs-2">
+      <label for="Movie">Movie</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.collection_select(:movie_id, Movie.all, :id, :title) %>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-xs-2">
+      <label for="Auditorium">Auditorium</label>
+    </div>
+  <div class="col-xs-2">
+    <%= f.collection_select(:auditorium_id, Auditorium.all, :id, :id) %>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-xs-2">
+      <label for="avail_seats">Available Seats</label>
+    </div>
+  <div class="col-xs-2">
+      <%= f.text_field :avail_seats %>
+    </div>
+    </div>
+  
+
+
+
+  <div class="row">
+  <div class="col-xs-2">
+    <button><%= link_to 'Back', showings_path %></button>
   </div>
-
-  <div class="field">
-    <%= f.label :showtime %>
-    <%= f.datetime_select :showtime %>
-  </div>
-
-  <div class="field">
-    <%= f.label :movie_id %>
-    <%= f.text_field :movie_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :auditorium_id %>
-    <%= f.text_field :auditorium_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :avail_seats %>
-    <%= f.number_field :avail_seats %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+    <div class="col-xs-2">
+      <%= f.submit %> 
+    </div>   
   </div>
 <% end %>
+
+</div>
+</div>

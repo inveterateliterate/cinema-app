@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002231032) do
+ActiveRecord::Schema.define(version: 20161003183147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,20 +26,24 @@ ActiveRecord::Schema.define(version: 20161002231032) do
     t.integer  "runtime"
     t.string   "description"
     t.string   "rating"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "orders", force: :cascade do |t|
     t.string   "cust_last"
     t.string   "cust_first"
     t.string   "cust_email"
-    t.integer  "sale"
     t.integer  "showing_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "cc_num"
     t.date     "cc_exp"
+    t.bigint   "cc_num"
+    t.float    "sale"
     t.index ["showing_id"], name: "index_orders_on_showing_id", using: :btree
   end
 

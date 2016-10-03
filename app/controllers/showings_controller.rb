@@ -1,6 +1,5 @@
 class ShowingsController < ApplicationController
   before_action :set_showing, only: [:show, :edit, :update, :destroy]
-
   # GET /showings
   # GET /showings.json
   def index
@@ -19,6 +18,10 @@ class ShowingsController < ApplicationController
 
   # GET /showings/1/edit
   def edit
+  end
+
+  def capacity_lookup
+    @auditorium = Auditorium.find(params[:id])
   end
 
   # POST /showings

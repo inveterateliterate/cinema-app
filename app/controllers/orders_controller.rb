@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+
   # GET /orders
   # GET /orders.json
   def index
@@ -15,6 +16,9 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @showing = Showing.find(params[:showing])
+    @movie = Movie.find(@showing.movie_id)
+    @price = 8.00
   end
 
   # GET /orders/1/edit
@@ -25,9 +29,12 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
+    @showing = Showing.find(@order.showing_id)
+    @movie = Movie.find(@showing.movie_id)
+    @price = 8.00
     respond_to do |format|
       if @order.save
+        OrderMailer.order_receipt(@order).deliver_now
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -69,6 +76,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:cust_last, :cust_first, :cust_email, :showing_id)
+      params.require(:order).permit(:cust_last, :cust_first, :cust_email, :showing_id, :cc_num, :cc_exp, :sale)
     end
 end

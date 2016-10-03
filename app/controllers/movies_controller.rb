@@ -7,6 +7,10 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
+  def homepage
+    @movies = Movie.all
+  end
+
   # GET /movies/1
   # GET /movies/1.json
   def show
@@ -69,6 +73,6 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :runtime, :description, :rating)
+      params.require(:movie).permit(:title, :runtime, :description, :rating, :image)
     end
 end

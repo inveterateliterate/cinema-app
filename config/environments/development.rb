@@ -47,8 +47,30 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
+  Paperclip.options[:command_path] = "C:/Windows/System32/convert.exe"
+  Paperclip.options[:command_path] = "C:/Program Files (x86)/GnuWin32/bin"
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => "iribon",
+      :access_key_id => "AKIAJPU2Z656DN7ZIJGA",
+      :secret_access_key => "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"
+    }
+  }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: "587",
+    domain: "gmail.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV['gmail_username'],
+    password: ENV['gmail_password'] 
+  }
+  
 end
