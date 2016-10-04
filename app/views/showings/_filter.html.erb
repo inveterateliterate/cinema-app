@@ -14,7 +14,7 @@
         </li>
     </ul>
 <% if @date === Date.today.strftime("%B %-d, %Y") %>
-    <h1>Movies showing on today:</h1>
+    <h1>Movies showing today:</h1>
  <% else %>   
 <h1><%= "Movies showing on #{@date}" %>:</h1>
     <% end %>
