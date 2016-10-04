@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
   end
   
   def show_by_title
-    @movie = Movie.find_by_name(params[:title])
+    @movie = Movie.find_by_title(params[:title])
     render :show
   end
 
