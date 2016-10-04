@@ -28,7 +28,7 @@
         <td><%= order.cust_email %></td>
         <td><%= link_to "#{Movie.find(Showing.find(order.showing_id).movie_id).title}", orders_by_movie_path(Showing.find(order.showing_id).movie_id) %></td>
 
-        <td><%= "#{Showing.find(order.showing_id).date.strftime("%-m/%-d/%Y")}   #{Showing.find(order.showing_id).showtime.strftime("%l:%M %p")}" %></td>
+        <td><%= "#{Showing.find(order.showing_id).showtime.strftime("%-m/%-d/%Y")}   #{Showing.find(order.showing_id).showtime.strftime("%l:%M %p")}" %></td>
         <td><%= number_to_currency(order.sale) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
