@@ -1,7 +1,21 @@
 <div class="main">
 <div class="container">
+    
+    <ul class="nav nav-pills">
+        <li class="dropdown open">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+            Showings <span class="caret"></span>
+            </a>
+                <ul class="dropdown-menu">
+                     <% dates.each do |date| %>
+                      <li><%= link_to "#{date}", showings_by_date_path(date.strftime(%D)) %></li>  
+                      <% end %>
+                </ul>
+        </li>
+    </ul>
 
 <h1>Movies showing today:</h1>
+    
 
 <div class="movies">   
     <% @movies.each do |movie| %>
