@@ -20,6 +20,7 @@ class ShowingsController < ApplicationController
 
   # GET /showings/1/edit
   def edit
+    @date = Date.today
   end
   
   def homepage
