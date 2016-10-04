@@ -1,6 +1,7 @@
 <div class="main">
 <div class="container">
 
+<h1>Movies showing today:</h1>
 
 <div class="movies">   
     <% @movies.each do |movie| %>
@@ -23,21 +24,22 @@
             <p>Runtime | <%= "#{movie.runtime} minutes" %></p>
             <p>Showtimes   
             <% movie.showings.each do |showing| %>
+            <%if showing.date === Date.today %>
               <% if showing.avail_seats > 0 %>
                <%= link_to " | #{showing.showtime.strftime("%l:%M %p")}  ", new_by_showing_path(showing.id) %>
                <% else %>
                 <%= " | #{showing.showtime.strftime("%l:%M %p")}" %>
                <%end%>
+              <%end%>
             <%end%>
             </p>
         </div>
-    </div>
-    
-          	
-      
+    </div>    
         </div>
       </div>
     </div>
     </div>
     <%end%>
   </div>
+
+  

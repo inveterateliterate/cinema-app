@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161003183147) do
+ActiveRecord::Schema.define(version: 20161003230802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20161003183147) do
     t.date     "cc_exp"
     t.bigint   "cc_num"
     t.float    "sale"
+    t.integer  "movie_id"
+    t.index ["movie_id"], name: "index_orders_on_movie_id", using: :btree
     t.index ["showing_id"], name: "index_orders_on_showing_id", using: :btree
   end
 
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20161003183147) do
     t.index ["movie_id"], name: "index_showings_on_movie_id", using: :btree
   end
 
+  add_foreign_key "orders", "movies"
   add_foreign_key "orders", "showings"
   add_foreign_key "showings", "auditoria"
   add_foreign_key "showings", "movies"

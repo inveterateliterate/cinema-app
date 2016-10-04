@@ -58,18 +58,10 @@
     </div>
     </div>
 
-    <div class="row">
-    <div class="col-xs-2">
-      <label for="avail_seats">Available Seats</label>
-    </div>
-  <div class="col-xs-2">
-      <%= f.collection_select(:avail_seats, Auditorium.all, :capacity, :capacity) %>
-    </div>
-    </div>
+    
 
 
   <div class="row">
- 
     <div class="col-xs-2 offset-col-xs-2">
      <%= f.submit %>
     </div>   

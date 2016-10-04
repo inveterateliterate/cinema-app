@@ -73,6 +73,6 @@ class ShowingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def showing_params
-      params.require(:showing).permit(:date, :showtime, :movie_id, :auditorium_id, :avail_seats)
+      params.require(:showing).permit(:date, :showtime, :movie_id, :auditorium_id)
     end
 end
