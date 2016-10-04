@@ -15,6 +15,7 @@ class ShowingsController < ApplicationController
   # GET /showings/new
   def new
     @showing = Showing.new
+    @date = Date.today
   end
 
   # GET /showings/1/edit
