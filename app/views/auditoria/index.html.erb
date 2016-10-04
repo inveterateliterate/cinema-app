@@ -1,10 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h1>Theaters</h1>
 
-<h1>Auditoria</h1>
-
-<table>
+<div class="container">
+<table class="auditorium-table table table-striped table-hover">
   <thead>
     <tr>
+      <th>Auditorium</th>
       <th>Capacity</th>
       <th colspan="3"></th>
     </tr>
@@ -13,8 +13,8 @@
   <tbody>
     <% @auditoria.each do |auditorium| %>
       <tr>
+        <td><%= auditorium.id %></td>
         <td><%= auditorium.capacity %></td>
-        <td><%= link_to 'Show', auditorium %></td>
         <td><%= link_to 'Edit', edit_auditorium_path(auditorium) %></td>
         <td><%= link_to 'Destroy', auditorium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -22,6 +22,6 @@
   </tbody>
 </table>
 
-<br>
 
 <%= link_to 'New Auditorium', new_auditorium_path %>
+</div>

@@ -10,8 +10,12 @@ class Movie < ApplicationRecord
   		Showing.where("movie_id=?", self.id)
   	end
 
-
-
-
+  	def orders
+  		movie_orders = []
+  		self.showings.each do |showing|
+  			movie_orders.push(Order.where("showing_id=?", showing.id))
+  		end
+  		movie_orders
+  	end
 
 end

@@ -63,22 +63,27 @@
       <label for="avail_seats">Available Seats</label>
     </div>
   <div class="col-xs-2">
-      <%= f.text_field :avail_seats %>
+      <%= f.collection_select(:avail_seats, Auditorium.all, :capacity, :capacity) %>
     </div>
     </div>
-  
-
 
 
   <div class="row">
-  <div class="col-xs-2">
-    <button><%= link_to 'Back', showings_path %></button>
-  </div>
-    <div class="col-xs-2">
-      <%= f.submit %> 
+ 
+    <div class="col-xs-2 offset-col-xs-2">
+     <%= f.submit %>
     </div>   
   </div>
 <% end %>
+
+<div class="row">
+ <div class="col-xs-1">
+   <%= link_to 'Back', showings_path %>
+  </div>
+  <div class="col-xs-2">
+   <%= link_to 'Edit Auditorium', auditoria_path %>
+  </div>
+  </div>
 
 </div>
 </div>

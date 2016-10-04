@@ -1,24 +1,38 @@
-<p id="notice"><%= notice %></p>
+
+<div class="container">
+
+<p id="notice">You have successfully purchased a ticket! Please review your information below. An email confirmation will be sent to you for your records.</p>
+
+<p><strong>CUSTOMER DETAILS:</strong></p>
 
 <p>
-  <strong>Cust last:</strong>
-  <%= @order.cust_last %>
+  <strong>Name:</strong>
+  <%= "#{@order.cust_first} #{@order.cust_last}" %>
 </p>
 
 <p>
-  <strong>Cust first:</strong>
-  <%= @order.cust_first %>
-</p>
-
-<p>
-  <strong>Cust email:</strong>
+  <strong>Email:</strong>
   <%= @order.cust_email %>
 </p>
 
+<p><strong>TICKET DETAILS:</strong></p>
+
 <p>
-  <strong>Showing:</strong>
-  <%= @order.showing %>
+  <strong>Movie:</strong>
+  <%= @movie.title %>
 </p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<p>
+  <strong>Showtime:</strong>
+  <%= @showing.showtime.strftime("%l:%M %p") %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  $8.00
+</p>
+
+<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+<%= link_to 'Back to Showings', root_path %>
+
+</div>

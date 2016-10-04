@@ -4,7 +4,9 @@ class Showing < ApplicationRecord
   has_many :orders
 
 
-
+	def show_orders
+      	Order.where("showing_id=?", self.id)
+  	end
   
 
 end

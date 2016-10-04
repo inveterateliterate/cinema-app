@@ -23,4 +23,9 @@
     </div>
   </div>
 
+  <% if showing.avail_seats > 0 %>
+
 <%= render 'form', order: @order %>
+
+<% else %>
+  <p>Unfortunately this showing is all sold out. Please check another showing!</p>

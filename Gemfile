@@ -34,6 +34,12 @@ gem 'paperclip', '~> 4.3.6'
 
 gem 'aws-sdk', '~> 1.6'
 
+gem 'validates_timeliness', '~> 4.0'
+
+gem 'email_validator'
+
+gem 'filterrific'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

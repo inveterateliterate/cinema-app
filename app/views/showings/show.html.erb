@@ -1,29 +1,33 @@
-<p id="notice"><%= notice %></p>
+
+
+<div class="container">
 
 <p>
-  <strong>Date:</strong>
-  <%= @showing.date %>
+  <strong>Date: </strong>
+  <%= @showing.date.strftime("%-m/%-d/%Y") %>
 </p>
 
 <p>
-  <strong>Showtime:</strong>
-  <%= @showing.showtime %>
+  <strong>Showtime: </strong>
+  <%= @showing.showtime.strftime("%l:%M %p") %>
 </p>
 
 <p>
-  <strong>Movie:</strong>
-  <%= @showing.movie %>
+  <strong>Movie: </strong>
+  <%= Movie.find(@showing.movie_id).title %>
 </p>
 
 <p>
-  <strong>Auditorium:</strong>
-  <%= @showing.auditorium %>
+  <strong>Auditorium: </strong>
+  <%= @showing.auditorium_id %>
 </p>
 
 <p>
-  <strong>Avail seats:</strong>
+  <strong>Available Seats: </strong>
   <%= @showing.avail_seats %>
 </p>
 
 <%= link_to 'Edit', edit_showing_path(@showing) %> |
 <%= link_to 'Back', showings_path %>
+
+</div>

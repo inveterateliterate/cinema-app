@@ -1,16 +1,25 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-
+  
 
   # GET /orders
   # GET /orders.json
   def index
     @orders = Order.all
+    @movies = Movie.all
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @showing = Showing.find(@order.showing_id)
+    @movie = Movie.find(@showing.movie_id)
+  end
+
+  def filter
+    @movie = Movie.find(params[:id])
+    @orders = @movie.orders
+    render :filtered
   end
 
   # GET /orders/new
@@ -67,6 +76,8 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
