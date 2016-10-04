@@ -27,7 +27,7 @@ class ShowingsController < ApplicationController
     @date = Date.today.strftime("%B %-d, %Y")
   end
 
-  def filter
+  def showdates
     @date = params[:date]
     @movies = Movie.all
     @dates = date_list
