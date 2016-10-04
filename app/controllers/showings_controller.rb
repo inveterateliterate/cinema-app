@@ -23,7 +23,6 @@ class ShowingsController < ApplicationController
 
   def filter
     @date = params[:date]
-    @showings = Showing.all.sort_by {|x| x.showtime}
     @movies = Movie.all
     @dates = date_list
   end
