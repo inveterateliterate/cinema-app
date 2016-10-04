@@ -21,8 +21,11 @@ class ShowingsController < ApplicationController
   def edit
   end
 
-  def capacity_lookup
-    @auditorium = Auditorium.find(params[:id])
+  def filter
+    @date = params[:date]
+    @showings = Showing.all.sort_by {|x| x.showtime}
+    @movies = Movie.all
+    dates = date_list
   end
 
   # POST /showings
