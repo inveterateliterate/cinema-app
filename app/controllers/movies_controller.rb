@@ -9,6 +9,7 @@ class MoviesController < ApplicationController
 
   def homepage
     @movies = Movie.all
+    dates = date_list
   end
 
   # GET /movies/1
