@@ -1,0 +1,57 @@
+<div class="main">
+<div class="container">
+    
+    <ul class="nav nav-pills">
+        <li class="dropdown open">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+            Showings <span class="caret"></span>
+            </a>
+                <ul class="dropdown-menu">
+                     <% @dates.each do |date| %>
+                      <li><%= link_to "#{date.join("")}", showings_by_date_path(date: date[1]) %></li>  
+                      <% end %>
+                </ul>
+        </li>
+    </ul>
+
+<h1><%= Movies showing on #{@date}" %>:</h1>
+    
+
+<div class="movies">   
+    <% @movies.each do |movie| %>
+    <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="movie-container col-md-8">
+        <div class="movie">
+       
+          <div class="logo-thumbnail col-xs-3">
+            <img src="<%= movie.image.url %>" height="160" width="160">
+          </div>
+
+          <div class="col-xs-9">
+            <h3><%= link_to "#{movie.title}", movie_by_title_path(movie.title) %></h3>
+            <p>Rating | <%= "#{movie.rating}" %></p>
+            <p>Runtime | <%= "#{movie.runtime} minutes" %></p>
+            <p>Showtimes   
+            <% movie.showings.each do |showing| %>
+            <%if showing.date.strftime(strftime("%B %-d, %Y") === @date %>
+              <% if showing.avail_seats > 0 %>
+               <%= link_to " | #{showing.showtime.strftime("%l:%M %p")}  ", new_by_showing_path(showing.id) %>
+               <% else %>
+                <%= " | #{showing.showtime.strftime("%l:%M %p")}" %>
+               <%end%>
+              <%end%>
+            <%end%>
+            </p>
+        </div>
+    </div>    
+        </div>
+      </div>
+    </div>
+    </div>
+    <%end%>
+  </div>
