@@ -3,7 +3,7 @@ The **Cinema App** (currently branded for the fictional Clearview Cinemas) is an
 Additionally, theater management can use the app to manage scheduling of movies and auditorium capacity, as well as track ticket purchase history.
 You can view the app live on Heroku at https://clearview-cinemas.herokuapp.com/
 
-## **Functionalities**
+## **Functionalities and Features**
 
 #### *Customers*
 * Customers can visit the site and view which movies are showing on a particular date.
