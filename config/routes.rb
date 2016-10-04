@@ -14,7 +14,7 @@ Rails.application.routes.draw do
  
   
 
-  get 'movies/:title' => "movies#show", as: "movie_by_title"
+  get 'movies/:title' => "movies#show_by_title", as: "movie_by_title"
   resources :movies
   
   resources :auditoria
