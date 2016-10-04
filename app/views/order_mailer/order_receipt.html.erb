@@ -6,7 +6,7 @@
 <body>
 	<h1>Hi <%= "#{@order.cust_first}!" %></h1>
 
-	<h3><%= "You have purchased tickets to see #{@movie.title} on #{@showing.showtime.strftime("%A, %D")} at #{@showtime.showtime.strftime("%l:%M %p")}" %></h3>
+	<h3><%= "You have purchased tickets to see #{@movie.title} on #{@showtime.date.strftime("%A, %D")} at #{@showtime.showtime.strftime("%l:%M %p")}" %></h3>
 
 	<p>Charge: $8.00</p>
 
