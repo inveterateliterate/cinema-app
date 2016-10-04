@@ -41,7 +41,7 @@
             <p>Runtime | <%= "#{movie.runtime} minutes" %></p>
             <p>Showtimes   
             <% movie.showings.each do |showing| %>
-            <%if showing.date.strftime("%B %-d, %Y") === @date %>
+            <%if showing.showtime.strftime("%B %-d, %Y") === @date %>
               <% if (showing.avail_seats > 0) && (showing.showtime > Time.now) %>
                <%= link_to " | #{showing.showtime.strftime("%l:%M %p")}  ", new_by_showing_path(showing.id) %>
                <% else %>
