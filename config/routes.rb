@@ -14,9 +14,10 @@ Rails.application.routes.draw do
  
   
 
- 
+  
   resources :movies
-   get 'movies/:title' => "movies#show_by_title", as: "movie_by_title"
+  get 'movies/title/:title' => "movies#show_by_title", as: "movie_by_title"
+   
   
   resources :auditoria
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
