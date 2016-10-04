@@ -25,7 +25,7 @@ class ShowingsController < ApplicationController
     @date = params[:date]
     @showings = Showing.all.sort_by {|x| x.showtime}
     @movies = Movie.all
-    dates = date_list
+    @dates = date_list
   end
 
   # POST /showings
