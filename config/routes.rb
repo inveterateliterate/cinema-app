@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "orders/movies/:id" => "orders#filter", as: "orders_by_movie"
   
    root 'showings#homepage'
-  get "showings/:date" => "showings#showdates", as: "showings_by_date"
+  get "showings/date/:date" => "showings#showdates", as: "showings_by_date"
   resources :showings
   
 
