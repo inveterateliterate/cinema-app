@@ -26,7 +26,7 @@
         <td><%= x.cust_first %></td>
         <td><%= x.cust_email %></td>
         <td><%= @movie.title %></td>
-        <td><%= "#{Showing.find(x.showing_id).date.strftime("%-m/%-d/%Y")}   #{Showing.find(x.showing_id).showtime.strftime("%l:%M %p")}" %></td>
+        <td><%= "#{Showing.find(x.showing_id).showtime.strftime("%-m/%-d/%Y")}   #{Showing.find(x.showing_id).showtime.strftime("%l:%M %p")}" %></td>
         <td><%= number_to_currency(x.sale) %></td>
       </tr>
       <% end %>
