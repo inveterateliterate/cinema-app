@@ -32,7 +32,7 @@ class ShowingsController < ApplicationController
     respond_to do |format|
       if @showing.save
         format.html { redirect_to @showing, notice: 'Showing was successfully created.' }
-        format.json { render :show, status: :created, location: @showing }
+        format.json { render :index, status: :created, location: @showing }
       else
         format.html { render :new }
         format.json { render json: @showing.errors, status: :unprocessable_entity }
