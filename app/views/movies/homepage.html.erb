@@ -8,7 +8,7 @@
             </a>
                 <ul class="dropdown-menu">
                      <% dates.each do |date| %>
-                      <li><%= link_to "#{date}", showings_by_date_path(date.strftime(%D)) %></li>  
+                      <li><%= link_to date, showings_by_date_path(date: date.strftime(%D)) %></li>  
                       <% end %>
                 </ul>
         </li>
