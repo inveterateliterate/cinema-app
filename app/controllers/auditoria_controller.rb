@@ -5,6 +5,7 @@ class AuditoriaController < ApplicationController
   # GET /auditoria.json
   def index
     @auditoria = Auditorium.all
+    @auditoria = @auditoria.sort
   end
 
   # GET /auditoria/1

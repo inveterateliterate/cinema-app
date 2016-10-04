@@ -2,13 +2,13 @@
 <html>
   <head>
     <title>ClearviewCinemas</title>
-    
+  
 
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="/flatly-bootswatch-theme.css">
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -16,6 +16,45 @@
   </head>
 
   <body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Clearview Cinemas</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav navbar-right">        
+        <li class="dropdown ">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>Customers</li>
+            <li class="divider"></li>
+            <li><%= link_to "Now Playing", root_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+            <li class="divider"></li>
+            <li>Owners</li>
+            <li class="divider"></li>
+            <li><%= link_to "Showings", showings_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+            <li><%= link_to "Orders", orders_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+            <li><%= link_to "Movies", movies_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+            <li><%= link_to "Theaters", auditoria_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+          </ul>
+        </li>
+      </ul>
+      
+
+    </div>
+  </div>
+</nav>
+
+
     <%= yield %>
   </body>
 </html>

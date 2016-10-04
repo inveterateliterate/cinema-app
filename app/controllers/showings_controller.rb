@@ -4,6 +4,7 @@ class ShowingsController < ApplicationController
   # GET /showings.json
   def index
     @showings = Showing.all
+    @showings = @showings.sort_by {|x| x.showtime }
   end
 
   # GET /showings/1
