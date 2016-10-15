@@ -11,10 +11,15 @@ class Movie < ApplicationRecord
   	end
 
   	def orders
-  		movie_orders = []
+      movie_orders = []
+      if !self.showings.empty?
   		self.showings.each do |showing|
-  			movie_orders.push(Order.where("showing_id=?", showing.id))
+        order = Order.find_by_showing_id(showing.id)
+        if !order.nil?
+  			movie_orders.push(order)
+        end
   		end
+    end
   		movie_orders
   	end
 
