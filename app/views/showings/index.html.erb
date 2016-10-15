@@ -19,7 +19,7 @@
   <tbody>
     <% @showings.each do |showing| %>
       <tr>
-        <td><%= showing.date.strftime("%-m/%-d/%Y") %></td>
+        <td><%= showing.showtime.strftime("%-m/%-d/%Y") %></td>
         <td><%= showing.showtime.strftime("%l:%M %p") %></td>
         <td><%= Movie.find(showing.movie_id).title %></td>
         <td><%= showing.auditorium_id %></td>

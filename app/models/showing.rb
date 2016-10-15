@@ -10,13 +10,13 @@ class Showing < ApplicationRecord
 
 	def show_orders
       	Order.where("showing_id=?", self.id)
-  	end
+  end
 
-  	def update_avail_seats
+  def update_avail_seats
   		auditorium = Auditorium.find(self.auditorium_id)
   		seats = auditorium.capacity
   		self.update_column(:avail_seats, seats)
-  	end
+  end
   
 
 end

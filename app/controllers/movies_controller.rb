@@ -7,13 +7,15 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
-  def homepage
-    @movies = Movie.all
-  end
-
   # GET /movies/1
   # GET /movies/1.json
   def show
+      @movie = Movie.find(params[:id])
+  end
+
+  def show_by_title
+    @movie = Movie.find_by_title(params[:title])
+    render :show
   end
 
   # GET /movies/new

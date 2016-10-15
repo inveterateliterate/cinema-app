@@ -1,5 +1,5 @@
 Hi <%= "#{@order.cust_first}!" %>
-<%= "You have purchased tickets to see #{@movie.title} tonight at #{@showtime.showtime.strftime("%l:%M %p")}" %>
+<%= "You have purchased tickets to see #{@movie.title} on #{@showtime.showtime.strftime("%A, %D")} at #{@showtime.showtime.strftime("%l:%M %p")}" %>
 
 Charge: $8.00
 

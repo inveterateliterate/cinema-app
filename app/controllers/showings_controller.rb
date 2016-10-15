@@ -15,21 +15,31 @@ class ShowingsController < ApplicationController
   # GET /showings/new
   def new
     @showing = Showing.new
+    @date = Date.today
   end
 
   # GET /showings/1/edit
   def edit
+    @date = Date.today
   end
 
-  def capacity_lookup
-    @auditorium = Auditorium.find(params[:id])
+  def homepage
+    @movies = Movie.all
+    @dates = date_list
+    @date = Date.today.strftime("%B %-d, %Y")
+  end
+
+  def showdates
+    @date = params[:date]
+    @movies = Movie.all
+    @dates = date_list
   end
 
   # POST /showings
   # POST /showings.json
   def create
     @showing = Showing.new(showing_params)
-
+    @date = Date.today
     respond_to do |format|
       if @showing.save
         format.html { redirect_to @showing, notice: 'Showing was successfully created.' }

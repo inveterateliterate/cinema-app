@@ -18,24 +18,16 @@
 <div class="container">
   <div class="form-group">
   <%= form_for(@showing) do |f| %>
+  <%= f.hidden_field :date, value: @date %>
   
 
 
   <div class="row">
     <div class="col-xs-2">
-      <label for="date">Date</label>
+      <label for="date">Showtime</label>
     </div>
   <div class="col-xs-2">
-    <%= f.date_field :date %>
-    </div>
-    </div>
-
-     <div class="row">
-    <div class="col-xs-2">
-      <label for="showtime">Showtime</label>
-    </div>
-  <div class="col-xs-2">
-    <%= f.time_field :showtime %>
+    <%= f.datetime_field :showtime %>
     </div>
     </div>
 

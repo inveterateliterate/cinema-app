@@ -1,7 +1,23 @@
 <div class="main">
 <div class="container">
 
-<h1>Movies showing today:</h1>
+<ul class="nav nav-pills">
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+		Showings<span class="caret"></span>
+		</a>
+			<ul class="dropdown-menu">
+				<% @dates.each do |date| %>
+				<li><%= link_to "#{date.join("")}", showings_by_date_path(date: date[1]) %></li>
+				<%end%>
+			</ul>
+	</li>
+</ul>
+<% if @date === Date.today.strftime("%B %-d, %Y") %>
+		<h1>Movies showing today:</h1>
+	<%else%>
+		<h1><%= "Movies showing on #{@date}" %>:</h1>
+<%end%>
 
 <div class="movies">   
     <% @movies.each do |movie| %>
@@ -24,8 +40,8 @@
             <p>Runtime | <%= "#{movie.runtime} minutes" %></p>
             <p>Showtimes   
             <% movie.showings.each do |showing| %>
-            <%if showing.date === Date.today %>
-              <% if showing.avail_seats > 0 %>
+            <%if showing.showtime.strftime("%B %-d, %Y") === @date %>
+              <% if (showing.avail_seats > 0) && (showing.showtime > Time.now) %>
                <%= link_to " | #{showing.showtime.strftime("%l:%M %p")}  ", new_by_showing_path(showing.id) %>
                <% else %>
                 <%= " | #{showing.showtime.strftime("%l:%M %p")}" %>
@@ -41,5 +57,3 @@
     </div>
     <%end%>
   </div>
-
-  

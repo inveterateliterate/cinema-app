@@ -18,3 +18,12 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore secrets
+/config/secrets.yml
+
+# Ignore database config
+/config/database.yml
+
+# Ignore development environ
+/config/environments/development.rb

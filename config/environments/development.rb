@@ -56,9 +56,9 @@ Rails.application.configure do
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => "iribon",
-      :access_key_id => "AKIAJPU2Z656DN7ZIJGA",
-      :secret_access_key => "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"
+      :bucket => "movie-poster",
+      :access_key_id => "AKIAINQ2PNRA4AK6V3PQ",
+      :secret_access_key => "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"
     }
   }
 

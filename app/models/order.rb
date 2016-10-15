@@ -18,7 +18,7 @@ class Order < ApplicationRecord
 
   def decrease_avail_seats
     showing = Showing.find(self.showing_id)
-    showing.update(avail_seats: showing.avail_seats - 1)
+    showing.update_column(:avail_seats, showing.avail_seats - 1)
   end
 
 
