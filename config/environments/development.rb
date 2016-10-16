@@ -53,14 +53,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => "movie-poster",
-      :access_key_id => "AKIAINQ2PNRA4AK6V3PQ",
-      :secret_access_key => "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"
-    }
-  }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
