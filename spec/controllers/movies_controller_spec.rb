@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe MoviesController, type: :controller do
 
 before(:each) do
-   @movie = Movie.first
+   @movie = FactoryGirl.create(:movie)
 end
 after(:each) do
   if !@movie.nil?
@@ -51,7 +51,7 @@ describe "POST create" do
     @movie_hash = { 
         title: "Princess Bride", 
         runtime: 125,
-        descrition: "Great movie!",
+        description: "Great movie!",
         rating: 'PG',
         image: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/blue-sky.jpg'), 'image/png')
       }     
@@ -88,7 +88,7 @@ describe "POST create" do
     it 'assigns the @errors instance variable on error' do
       @movie_hash.delete(:title)
       post :create, movie: @movie_hash
-      expect(assigns[:error].present?).to be(true)
+      expect(assigns[:movie].errors.any?).to be(true)
     end 
 end
 
@@ -146,7 +146,7 @@ describe "PUT update" do
   	it 'assigns the @errors instance variable on error' do
       @movie_hash[:title] = ""
       put :update, movie: @movie_hash, id: @movie.id
-      expect(assigns[:errors].present?).to be(true)
+      expect(assigns[:movie].errors.any?).to be(true)
   	end
 
   	it "re-renders the 'edit' template" do

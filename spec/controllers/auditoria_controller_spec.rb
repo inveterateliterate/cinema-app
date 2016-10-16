@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe AuditoriaController, type: :controller do
 
 before(:each) do
-   @auditorium = Auditorium.first
+   @auditorium = Auditorium.create(capacity: 50)
 end
 after(:each) do
   if !@auditorium.nil?
@@ -66,32 +66,32 @@ describe "POST create" do
 
   	it 'creates an auditorium' do
       post :create, auditorium: @auditorium_hash  
-      expect(Audtorium.find_by_capacity(400).present?).to be(true)
+      expect(Auditorium.find_by_capacity(400).present?).to be(true)
     end
 
 
   	it 'redirects to the show view' do
       post :create, auditorium: @auditorium_hash
-      expect(response).to redirect_to(auditorium_url(assigns[:auditorium]))
+      expect(response).to redirect_to(auditorium_url(assigns(:auditorium)))
   	end
 
   	it 'redisplays new form on error' do
-      @auditorium_hash.delete(:capacity)
+      @auditorium_hash[:capacity] = nil
       post :create, auditorium: @auditorium_hash
       expect(response).to render_template(:new)
     end
     
     it 'assigns the @errors instance variable on error' do
-      @auditorium_hash.delete(:capacity)
+      @auditorium_hash[:capacity] = ""
       post :create, auditorium: @auditorium_hash
-      expect(assigns[:error].present?).to be(true)
+      expect(assigns[:auditorium].errors.any?).to be(true)
     end 
 end
 
 describe "GET edit" do
-  before(:each) do
-    @auditorium = Auditorium.first
-  end
+#  before(:each) do
+#    @auditorium = Auditorium.first
+#  end
 
   it "responds with success" do
 	 get :edit, id: @auditorium.id
@@ -126,7 +126,7 @@ describe "PUT update" do
     it 'updates an auditorium' do
       put :update, auditorium: @auditorium_hash, id: @auditorium.id
       @auditorium.reload
-      expect(@auditorium.url).to eq(@auditorium_hash[:url])
+      expect(@auditorium.capacity).to eq(@auditorium_hash[:capacity])
     end
   
     it 'redirects to the show view' do
@@ -136,13 +136,13 @@ describe "PUT update" do
     end
 
   	it 'assigns the @errors instance variable on error' do
-      @auditorium_hash[:url] = ""
+      @auditorium_hash[:capacity] = ""
       put :update, auditorium: @auditorium_hash, id: @auditorium.id
-      expect(assigns[:errors].present?).to be(true)
+      expect(assigns[:auditorium].errors.any?).to be(true)
   	end
 
   	it "re-renders the 'edit' template" do
-       @auditorium_hash[:url] = ""
+       @auditorium_hash[:capacity] = ""
        put :update, auditorium: @auditorium_hash, id: @auditorium.id
        expect(response).to render_template(:edit)
   	end

@@ -3,7 +3,7 @@ class Showing < ApplicationRecord
   validates_uniqueness_of :showtime
   belongs_to :movie
   belongs_to :auditorium
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
  	after_save :update_avail_seats
 

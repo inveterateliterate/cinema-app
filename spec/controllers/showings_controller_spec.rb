@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe ShowingsController, type: :controller do
 
 before(:each) do
-   @showing = Showing.first
+   @showing = FactoryGirl.create(:showing)
 end
 after(:each) do
   if !@showing.nil?
@@ -24,9 +24,43 @@ describe "GET index" do
   	end
 
   	it "populates an instance variable @showings with all showings in the database" do
-		get :index
-		expect(assigns[:showings]).to eq(Showing.all)
-	end
+		  get :index
+		  expect(assigns[:showings]).to eq(Showing.all)
+	  end
+end
+
+describe "GET homepage" do
+  it 'responds with success' do
+    get :homepage
+    expect(response.success?).to be(true)
+  end
+
+    it 'renders the homepage template' do
+      get :homepage
+      expect(response).to render_template("homepage")
+    end
+
+    it "populates an instance variable @date with today's date" do
+      get :homepage
+      expect(assigns[:date]).to eq(Date.today.strftime("%B %-d, %Y"))
+    end
+end
+
+describe "GET showdates" do
+  it 'responds with success' do
+    get :showdates, date: (Date.today+1).strftime("%B %-d, %Y")
+    expect(response.success?).to be(true)
+  end
+
+    it 'renders the showdates template' do
+      get :showdates, date: (Date.today+1).strftime("%B %-d, %Y")
+      expect(response).to render_template("showdates")
+    end
+
+    it "populates an instance variable @date with the selected date" do
+      get :showdates, date: (Date.today+1).strftime("%B %-d, %Y")
+      expect(assigns[:date]).to eq((Date.today+1).strftime("%B %-d, %Y"))
+    end
 end
 
 describe "GET new" do
@@ -40,7 +74,7 @@ describe "GET new" do
       expect(response).to render_template(:new)
   end
 
-  it 'assigns an instance variable to a new auditorium' do
+  it 'assigns an instance variable to a new showing' do
       get :new
       expect(assigns(:showing)).to be_a_new(Showing)
   end
@@ -49,10 +83,11 @@ end
 describe "POST create" do
   before(:each) do
     @showing_hash = { 
-        date: 10/5/2016,
-        time: 03:40 PM,
+        date: Date.today,
+        showtime: Time.now,
         movie_id: 1,
-        auditorium_id: 1
+        auditorium_id: 1,
+        avail_seats: 80
       }     
   end
   after(:each) do
@@ -67,7 +102,7 @@ describe "POST create" do
     expect(response.redirect?).to be(true) 
   	end
 
-  	it 'creates an auditorium' do
+  	it 'creates a showing' do
       post :create, showing: @showing_hash  
       expect(Showing.find_by_movie_id(1).present?).to be(true)
     end
@@ -87,7 +122,7 @@ describe "POST create" do
     it 'assigns the @errors instance variable on error' do
        @showing_hash.delete(:movie_id)
       post :create, showing: @showing_hash
-      expect(assigns[:error].present?).to be(true)
+      expect(assigns[:showing].errors.any?).to be(true)
     end 
 end
 
@@ -117,10 +152,11 @@ describe "PUT update" do
   before(:each) do
     @showing = Showing.last
     @showing_hash = { 
-        date: 10/5/2016,
-        time: 03:40 PM,
+        date: Date.today,
+        showtime: Time.now,
         movie_id: 1,
-        auditorium_id: 1
+        auditorium_id: 1,
+        avail_seats: 80
       } 
   end
 
@@ -144,7 +180,7 @@ describe "PUT update" do
   	it 'assigns the @errors instance variable on error' do
       @showing_hash[:movie_id] = ""
       put :update, showing: @showing_hash, id: @showing.id
-      expect(assigns[:error].present?).to be(true)
+      expect(assigns[:showing].errors.any?).to be(true)
   	end
 
   	it "re-renders the 'edit' template" do
