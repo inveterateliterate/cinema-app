@@ -1,12 +1,9 @@
 require 'spec_helper'
-##needs to be updated
 
 RSpec.describe Order, type: :model do
   	before(:all) do
-  		@auditorium = FactoryGirl.create(:auditorium)
-  		@movie = FactoryGirl.create(:movie)
-  		@showing =  FactoryGirl.create(:showing)
-  		@order = FactoryGirl.create(:order)
+  		@auditorium = Auditorium.create(capacity: 40)
+  		@showing = Showing.create(date: Date.today, showtime: TIme.now + 1, movie_id: 1, auditorium_id: @auditorium.id)
 	end
  
 	after(:all) do
@@ -16,18 +13,14 @@ RSpec.describe Order, type: :model do
     		@showing.destroy
   		end
 	end
-
- describe 'Order' do
- 	#it 'triggers decrease_avail_seats on save' do
- 	#	@order.save
- 	#	expect(@showing).to receive(:decrease_avail_seats) 		
- 	#end
-
+ 
 	it "decreases a showing's available seats by 1 after save" do
-		decreased = @auditorium.capacity - 1
-		@order.save
-		expect(@showing.avail_seats).to eq(decreased)		
+		@order = Order.create(cust_last: "Smith", cust_first: "John", cust_email: "clearviewcinemas16@gmail.com", cc_num: 1234567891011121, cc_exp: Date.today+1, sale: 8.00, showing_id: @showing.id)
+		expect(@showing.avail_seats).to change(@showing.avail_seats).by(1) 		
 	end
+
+	it 'sends an email' do
+		expect(subject.send_)
 
 	it { should validate_presence_of(:cust_last) }
 	it { should validate_presence_of(:cust_first) }
@@ -36,7 +29,5 @@ RSpec.describe Order, type: :model do
 	it { should validate_presence_of(:cc_exp) }
 	it { should validate_presence_of(:sale) }
 	it { should validate_presence_of(:showing_id) }
-
-end
 
 end

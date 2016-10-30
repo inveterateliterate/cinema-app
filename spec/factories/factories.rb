@@ -1,6 +1,6 @@
 FactoryGirl.define do 
 	factory :auditorium do
-		capacity 40
+		capacity 400
 	end
 
 	factory :movie do
