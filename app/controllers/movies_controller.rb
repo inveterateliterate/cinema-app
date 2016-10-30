@@ -10,9 +10,15 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+<<<<<<< HEAD
       @movie = Movie.find(params[:id])
   end
 
+=======
+    @movie = Movie.find(params[:id])
+  end
+  
+>>>>>>> 7307c8b90802a22d056683a463d0fb4ba572b665
   def show_by_title
     @movie = Movie.find_by_title(params[:title])
     render :show

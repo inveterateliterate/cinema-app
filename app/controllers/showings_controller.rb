@@ -21,6 +21,7 @@ class ShowingsController < ApplicationController
   # GET /showings/1/edit
   def edit
     @date = Date.today
+<<<<<<< HEAD
   end
 
   def homepage
@@ -29,6 +30,16 @@ class ShowingsController < ApplicationController
     @date = Date.today.strftime("%B %-d, %Y")
   end
 
+=======
+  end
+  
+  def homepage
+    @movies = Movie.all
+    @dates = date_list
+    @date = Date.today.strftime("%B %-d, %Y")
+  end
+
+>>>>>>> 7307c8b90802a22d056683a463d0fb4ba572b665
   def showdates
     @date = params[:date]
     @movies = Movie.all
