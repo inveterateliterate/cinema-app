@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
   def filter
     @movie = Movie.find(params[:id])
     @orders = @movie.orders
+    @movies = Movie.all
     render :filtered
   end
 

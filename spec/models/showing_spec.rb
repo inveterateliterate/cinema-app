@@ -14,6 +14,7 @@ RSpec.describe Showing, type: :model do
   		end
 	end
  
+ 	describe 'Showing' do
 	it "updates available seats after save" do
 		@showing = Showing.create(date: Date.today, showtime: Time.now + 1, movie_id: @movie.id, auditorium_id: @auditorium.id)
 		expect(@showing.avail_seats).to eq(@auditorium.capacity) 		
@@ -25,4 +26,5 @@ RSpec.describe Showing, type: :model do
 	it { should validate_presence_of(:auditorium_id) }
 	it { should validate_uniqueness_of(:showtime) }
 
+	end
 end

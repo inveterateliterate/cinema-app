@@ -3,9 +3,10 @@ require 'spec_helper'
 RSpec.describe OrdersController, type: :controller do
 
 before(:each) do
-   @order = FactoryGirl.create(:order)
-   @showing = FactoryGirl.create(:showing)
    @movie = FactoryGirl.create(:movie)
+   @showing = FactoryGirl.create(:showing)
+   @order = FactoryGirl.create(:order)
+   
 end
 after(:each) do
   if !@order.nil?
@@ -53,18 +54,22 @@ describe "POST create" do
     @order_hash = { 
         cust_first: "Suzy",
         cust_last: "Q",
-        cust_email: "suzyq@gmail.com",
+        cust_email: "clearviewcinemas16@gmail.com",
         showing_id: 1,
         cc_num: 1234567891011121,
         cc_exp: Date.today+1,
         sale: 8.00
-      }     
+      } 
+      ActionMailer::Base.delivery_method = :test
+      ActionMailer::Base.perform_deliveries = true
+      ActionMailer::Base.deliveries = []    
   end
   after(:each) do
-    order = Order.find_by_cust_email("suzyq@gmail.com")
+    order = Order.find_by_cust_email("clearviewcinemas16@gmail.com")
     if !order.nil?
       	order.destroy
     end
+    ActionMailer::Base.deliveries.clear
   end
 
   	it 'responds with a redirect' do
@@ -74,12 +79,12 @@ describe "POST create" do
 
   	it 'creates an order' do
       post :create, order: @order_hash  
-      expect(Order.find_by_cust_email("suzyq@gmail.com").present?).to be(true)
+      expect(Order.find_by_cust_email("clearviewcinemas16@gmail.com").present?).to be(true)
     end
 
     it 'sends an email to the customer' do
       post :create, order:@order_hash
-      expect(@order.order_receipts).to change(ActionMailer::Base.deliveries.count).by(1)
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
   	it 'redirects to the show view' do

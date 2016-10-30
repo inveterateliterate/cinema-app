@@ -1,4 +1,4 @@
-class OrderMailer < ApplicationMailer
+class OrderMailer < ActionMailer::Base
 	default from: 'clearviewcinemas16@gmail.com'
 
 	def order_receipt(order)
