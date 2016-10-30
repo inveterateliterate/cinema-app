@@ -77,6 +77,11 @@ describe "POST create" do
       expect(Order.find_by_cust_email("suzyq@gmail.com").present?).to be(true)
     end
 
+    it 'sends an email to the customer' do
+      post :create, order:@order_hash
+      expect(@order.order_receipts).to change(ActionMailer::Base.deliveries.count).by(1)
+    end
+
   	it 'redirects to the show view' do
       post :create, order: @order_hash
       expect(response).to redirect_to(order_url(assigns[:order]))
