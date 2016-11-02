@@ -26,4 +26,4 @@
 #/config/database.yml
 
 # Ignore development environ
-/config/environments/development.rb
+#/config/environments/development.rb
