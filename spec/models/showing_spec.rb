@@ -8,9 +8,9 @@ RSpec.describe Showing, type: :model do
  
 	after(:all) do
  		if !@showing.destroyed?
+ 			@showing.destroy
     		@auditorium.destroy
-    		@movie.destroy
-    		@showing.destroy
+    		@movie.destroy	
   		end
 	end
  

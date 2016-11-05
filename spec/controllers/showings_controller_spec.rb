@@ -25,7 +25,7 @@ describe "GET index" do
 
   	it "populates an instance variable @showings with all showings in the database" do
 		  get :index
-		  expect(assigns[:showings]).to eq(Showing.all)
+		  expect(assigns[:showings]).to eq(Showing.all.sort_by {|x| x.showtime })
 	  end
 end
 
@@ -87,7 +87,7 @@ describe "POST create" do
         showtime: Time.now,
         movie_id: 1,
         auditorium_id: 1,
-        avail_seats: 80
+        #avail_seats: 80
       }     
   end
   after(:each) do
@@ -154,7 +154,7 @@ describe "PUT update" do
     @showing_hash = { 
         date: Date.today,
         showtime: Time.now,
-        movie_id: 1,
+        movie_id: 2,
         auditorium_id: 1,
         avail_seats: 80
       } 
@@ -165,7 +165,7 @@ describe "PUT update" do
       expect(response.redirect?).to be(true)
     end
    
-    it 'updates an auditorium' do
+    it 'updates a showing' do
       put :update, showing: @showing_hash, id: @showing.id
       @showing.reload
       expect(@showing.movie_id).to eq(@showing_hash[:movie_id])

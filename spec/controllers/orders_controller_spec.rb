@@ -11,6 +11,8 @@ end
 after(:each) do
   if !@order.nil?
     @order.destroy
+    #@showing.destroy
+    @movie.destroy
   end
 end
 

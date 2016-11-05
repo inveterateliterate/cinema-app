@@ -19,9 +19,9 @@ RSpec.describe ShowingsController, type: :routing do
       expect(:get => "/").to route_to("showings#homepage")
     end
     
-    it "routes to #showdates" do
-      expect(:get => "showings/date/October%2017,%202016").to route_to("showings#showdates", :date => (Date.today+1).strftime("%B %-d, %Y"))
-    end
+    #it "routes to #showdates" do
+    #  expect(:get => "showings/date/October%2017,%202016").to route_to("showings#showdates", :date => (Date.today+1).strftime("%B %-d, %Y"))
+    #end
 
     it "routes to #edit" do
       expect(:get => "/showings/1/edit").to route_to("showings#edit", :id => "1")

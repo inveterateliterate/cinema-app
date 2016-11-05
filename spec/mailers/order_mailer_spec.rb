@@ -13,6 +13,9 @@ RSpec.describe OrderMailer, type: :mailer do
     order = Order.find_by_cust_email("clearviewcinemas16@gmail.com")
     if !order.nil?
       	order.destroy
+        @order.destroy
+        @showing.destroy
+        @movie.destroy
     end
   end
   

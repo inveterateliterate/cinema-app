@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  validates_presence_of :cust_first, :cust_last, :cust_email, :sale, :cc_num, :cc_exp
+  validates_presence_of :cust_first, :cust_last, :cust_email, :sale, :cc_num, :cc_exp, :showing_id
   validates_numericality_of :cc_num, :on => :create
   validates_length_of :cc_num, :is => 16, :message => " is an invalid credit card number"
   validate :invalid_exp_date
