@@ -18,12 +18,4 @@ def date_list
 	return dates
 end
 
-def format_list
-	dates = date_list
-	list = []
-	dates.each do |x|
-		list.push(x.join(""))
-	end
-end
-
 end

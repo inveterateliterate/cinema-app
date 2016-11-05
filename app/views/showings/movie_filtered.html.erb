@@ -1,0 +1,6 @@
+<h1><%= "Showings for #{@movie.title}" %></h1>
+
+<%= render 'index_filter', movie: @movie, showings: @showings, movies: @movies %>
+<div class="container">
+  <%= link_to 'Back', showings_path %>
+</div>

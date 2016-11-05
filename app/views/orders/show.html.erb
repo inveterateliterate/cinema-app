@@ -24,7 +24,7 @@
 
 <p>
   <strong>Showtime:</strong>
-  <%= @showing.showtime.strftime("%l:%M %p") %>
+  <%= "#{@showing.showtime.strftime("%A, %D")} at  #{@showing.showtime.strftime("%l:%M %p")}" %>
 </p>
 
 <p>

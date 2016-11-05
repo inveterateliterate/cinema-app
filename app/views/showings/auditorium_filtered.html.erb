@@ -1,0 +1,6 @@
+<h1><%= "Showings for Auditorium #{@auditorium.id}" %></h1>
+
+<%= render 'index_filter', auditorium: @auditorium, showings: @showings, auditoria: @auditoria %>
+<div class="container">
+  <%= link_to 'Back', showings_path %>
+</div>

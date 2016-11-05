@@ -11,9 +11,11 @@ class Order < ApplicationRecord
 
 
   def invalid_exp_date
-    if (cc_exp < Date.today)
-      errors.add(:cc_exp, "is in the past")
-  	end
+    if (!cc_exp.nil?)
+      if (cc_exp < Date.today)
+        errors.add(:cc_exp, "is in the past")
+  	 end
+    end
   end
 
   def decrease_avail_seats

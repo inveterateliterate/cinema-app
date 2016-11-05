@@ -7,7 +7,8 @@ class Movie < ApplicationRecord
 	validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
 	def showings
-  		Showing.where("movie_id=?", self.id)
+  		movie_showings = Showing.where("movie_id=?", self.id)
+      movie_showings.sort_by {|x| x.showtime }
   	end
 
   	def orders

@@ -41,8 +41,13 @@ class AuditoriaController < ApplicationController
   # PATCH/PUT /auditoria/1
   # PATCH/PUT /auditoria/1.json
   def update
+    @showings = @auditorium.showings
     respond_to do |format|
       if @auditorium.update(auditorium_params)
+        @showings.each do |showing|
+            new_seats = @auditorium.capacity - showing.show_orders.count
+            showing.update_column(:avail_seats, new_seats)
+        end
         format.html { redirect_to @auditorium, notice: 'Auditorium was successfully updated.' }
         format.json { render :show, status: :ok, location: @auditorium }
       else

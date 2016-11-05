@@ -5,6 +5,8 @@ class ShowingsController < ApplicationController
   def index
     @showings = Showing.all
     @showings = @showings.sort_by {|x| x.showtime }
+    @movies = Movie.all
+    @auditoria = Auditorium.all.sort
   end
 
   # GET /showings/1
@@ -33,6 +35,22 @@ class ShowingsController < ApplicationController
     @date = params[:date]
     @movies = Movie.all
     @dates = date_list
+  end
+
+  def movie_filter
+    @movies = Movie.all
+    @movie = Movie.find(params[:id])
+    @auditoria = Auditorium.all.sort
+    @showings = @movie.showings
+    render :movie_filtered
+  end
+
+  def auditorium_filter
+    @movies = Movie.all
+    @auditoria = Auditorium.all.sort
+    @auditorium = Auditorium.find(params[:id])
+    @showings = @auditorium.showings
+    render :auditorium_filtered
   end
 
   # POST /showings
