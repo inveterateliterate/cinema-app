@@ -15,7 +15,7 @@ class Movie < ApplicationRecord
   		movie_orders = []
       if !self.showings.empty?
   		self.showings.each do |showing|
-  			order = Order.find_by_showing(showing.id)
+  			order = Order.find_by_showing_id(showing.id)
         if !order.nil?
           movie_orders.push(order)
         end
