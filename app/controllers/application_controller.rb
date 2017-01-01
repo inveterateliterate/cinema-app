@@ -16,6 +16,6 @@ def date_list
   			end
   		end
 	return dates
-end
+  end
 
 end

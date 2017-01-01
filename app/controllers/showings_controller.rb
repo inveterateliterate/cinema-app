@@ -24,7 +24,7 @@ class ShowingsController < ApplicationController
   def edit
     @date = Date.today
   end
-
+  
   def homepage
     @movies = Movie.all
     @dates = date_list
