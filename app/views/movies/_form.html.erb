@@ -1,80 +1,75 @@
-<%= form_for(movie) do |f| %>
-  <% if movie.errors.any? %>
-    <div id="error_explanation">
-    <div class="alert alert-dismissible alert-danger">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <label><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</label>
-
-      <ul>
-      <% movie.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-    </div>
-  <% end %>  
-  <% end %>
-
-  <div class="container">
+<div class="container">
   <div class="form-group">
-  <%= form_for(@movie, multipart: true) do |f| %>
+      <%= form_for(@movie, multipart: true) do |f| %>
 
-  <div class="row">
-    <div class="col-xs-2">
-      <label for="title">Title</label>
-    </div>
-  <div class="col-xs-2">
-    <%= f.text_field :title %>
-    </div>
-    </div>
+        <% if movie.errors.any? %>
+          <div id="error_explanation">
+            <div class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <label><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</label>
 
-    <div class="row">
-    <div class="col-xs-2">
-      <label for="runtime">Runtime (min)</label>
-    </div>
-  <div class="col-xs-2">
-    <%= f.text_field :runtime %>
-    </div>
-    </div>
+              <ul>
+                <% movie.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>  
 
-    <div class="row">
-    <div class="col-xs-2">
-      <label for="description">Description</label>
-    </div>
-  <div class="col-xs-2">
-    <%= f.text_area :description %>
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="col-xs-2">
-      <label for="select" class="control-label">Rating</label>
+      <div class="row">
+        <div class="col-xs-2">
+          <label for="title">Title</label>
         </div>
         <div class="col-xs-2">
-        <%= f.select :rating, [['G', 'G'], ['PG', 'PG'], ['PG-13', 'PG-13'],['R','R']] %>
+          <%= f.text_field :title %>
         </div>
       </div>
 
-<div class="row">
-    <div class="col-xs-2">
-      <label for="movie-image">Poster</label>
-    </div>
-  <div class="col-xs-2">
-    <%= f.file_field :image %>
-    </div>
-    </div>
-  
-<div class="row">
-  <div class="col-xs-2">
-    <button><%= link_to 'Back', movies_path %></button>
-  </div>
-    <div class="col-xs-2">
-      <%= f.submit "Submit" %> 
-    </div>   
-  </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <label for="runtime">Runtime (min)</label>
+        </div>
+        <div class="col-xs-2">
+          <%= f.text_field :runtime %>
+        </div>
+      </div>
 
-  
-<% end %>
+      <div class="row">
+        <div class="col-xs-2">
+          <label for="description">Description</label>
+        </div>
+        <div class="col-xs-2">
+          <%= f.text_area :description %>
+        </div>
+      </div>
 
-</div>
+      <div class="row">
+        <div class="col-xs-2">
+          <label for="select" class="control-label">Rating</label>
+        </div>
+        <div class="col-xs-2">
+          <%= f.select :rating, [['G', 'G'], ['PG', 'PG'], ['PG-13', 'PG-13'],['R','R']] %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <label for="movie-image">Poster</label>
+        </div>
+        <div class="col-xs-2">
+          <%= f.file_field :image %>
+        </div>
+      </div>
+        
+      <div class="row">
+        <div class="col-xs-2">
+          <button><%= link_to 'Back', movies_path %></button>
+        </div>
+        <div class="col-xs-2">
+          <%= f.submit "Submit" %> 
+        </div>   
+      </div> 
+    <% end %>
+  </div>
 </div>

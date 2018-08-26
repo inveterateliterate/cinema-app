@@ -1,36 +1,33 @@
 <h1>Movies</h1>
 
 <div class="container">
-
-<table class="table table-striped table-hover">
-
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Runtime</th>
-      <th>Description</th>
-      <th>Rating</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
+  <table class="table table-striped table-hover">
+    <thead>
       <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.runtime %></td>
-        <td><%= movie.description %></td>
-        <td><%= movie.rating %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Title</th>
+        <th>Runtime</th>
+        <th>Description</th>
+        <th>Rating</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= movie.runtime %></td>
+          <td><%= movie.description %></td>
+          <td><%= movie.rating %></td>
+          <td><%= link_to 'Show', movie %></td>
+          <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+          <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Movie', new_movie_path %>
+  <br>
 
+  <%= link_to 'New Movie', new_movie_path %>
 </div>

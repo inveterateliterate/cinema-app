@@ -1,5 +1,5 @@
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
 RSpec.configure do |config|
@@ -8,14 +8,13 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
-    Rails.application.load_seed # loading seeds
+    Rails.application.load_seed
   end
 
-   Shoulda::Matchers.configure do |config|
+  Shoulda::Matchers.configure do |config|
   	config.integrate do |with|
   		with.test_framework :rspec
   		with.library :rails
   	end
   end
-  
 end

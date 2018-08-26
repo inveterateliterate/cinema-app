@@ -8,7 +8,7 @@
 		Showings<span class="caret"></span>
 		</a>
 			<ul class="dropdown-menu">
-				<% @dates.each do |date| %>
+				<% date_list.each do |date| %>
 				<li><%= link_to "#{date.join("")}", showings_by_date_path(date: date[1]) %></li>
 				<%end%>
 			</ul>
@@ -41,7 +41,7 @@
             <p>Rating | <%= "#{movie.rating}" %></p>
             <p>Runtime | <%= "#{movie.runtime} minutes" %></p>
             <p>Showtimes   
-            <% movie.showings.each do |showing| %>
+            <% movie.showings.by_showtime.each do |showing| %>
             <%if showing.showtime.strftime("%B %-d, %Y") === @date %>
               <% if (showing.avail_seats > 0) && (showing.showtime > Time.now) %>
                <%= link_to " | #{showing.showtime.strftime("%l:%M %p")}  ", new_by_showing_path(showing.id) %>

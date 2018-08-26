@@ -3,15 +3,16 @@
 	<head>
 		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 	</head>
-<body>
-	<h1>Hi <%= "#{@order.cust_first}!" %></h1>
 
-	<h3><%= "You have purchased tickets to see #{@movie.title} on #{@showtime.showtime.strftime("%A, %D")} at #{@showtime.showtime.strftime("%l:%M %p")}" %></h3>
+	<body>
+		<h1>Hi <%= "#{@order.cust_first}!" %></h1>
 
-	<p>Charge: $8.00</p>
+		<h3><%= "You have purchased tickets to see #{@movie.title} on #{@showtime.showtime.strftime("%A, %D")} at #{@showtime.showtime.strftime("%l:%M %p")}" %></h3>
 
-<h4>Enjoy the Movie!</h4>
+		<p>Charge: $8.00</p>
 
-<h4>Clearview Cinemas</h4>
-</body> 
+		<h4>Enjoy the Movie!</h4>
+
+		<h4>Clearview Cinemas</h4>
+	</body> 
 </html>

@@ -1,63 +1,47 @@
 class ShowingsController < ApplicationController
   before_action :set_showing, only: [:show, :edit, :update, :destroy]
-  # GET /showings
-  # GET /showings.json
+  before_action :set_movie, only: [:index, :homepage, :showdates, :movie_filter, :auditorium_filter]
+
   def index
     @showings = Showing.all
-    @showings = @showings.sort_by {|x| x.showtime }
-    @movies = Movie.all
-    @auditoria = Auditorium.all.sort
+    @showings = @showings.order(showtime: :asc)
+    @auditoria = Auditorium.all.order(num: :asc)
   end
 
-  # GET /showings/1
-  # GET /showings/1.json
   def show
   end
 
-  # GET /showings/new
   def new
     @showing = Showing.new
-    @date = Date.today
   end
 
-  # GET /showings/1/edit
   def edit
-    @date = Date.today
   end
   
   def homepage
-    @movies = Movie.all
-    @dates = date_list
     @date = Date.today.strftime("%B %-d, %Y")
   end
 
   def showdates
     @date = params[:date]
-    @movies = Movie.all
-    @dates = date_list
   end
 
   def movie_filter
-    @movies = Movie.all
     @movie = Movie.find(params[:id])
     @auditoria = Auditorium.all.sort
-    @showings = @movie.showings
+    @showings = @movie.showings.by_showtime
     render :movie_filtered
   end
 
   def auditorium_filter
-    @movies = Movie.all
     @auditoria = Auditorium.all.sort
     @auditorium = Auditorium.find(params[:id])
     @showings = @auditorium.showings
     render :auditorium_filtered
   end
 
-  # POST /showings
-  # POST /showings.json
   def create
     @showing = Showing.new(showing_params)
-    @date = Date.today
     respond_to do |format|
       if @showing.save
         format.html { redirect_to @showing, notice: 'Showing was successfully created.' }
@@ -69,8 +53,6 @@ class ShowingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /showings/1
-  # PATCH/PUT /showings/1.json
   def update
     respond_to do |format|
       if @showing.update(showing_params)
@@ -83,8 +65,6 @@ class ShowingsController < ApplicationController
     end
   end
 
-  # DELETE /showings/1
-  # DELETE /showings/1.json
   def destroy
     @showing.destroy
     respond_to do |format|
@@ -94,13 +74,16 @@ class ShowingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_showing
-      @showing = Showing.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def showing_params
-      params.require(:showing).permit(:date, :showtime, :movie_id, :auditorium_id)
-    end
+  def set_showing
+    @showing = Showing.find(params[:id])
+  end
+
+  def set_movies
+    @movies = Movie.all
+  end
+
+  def showing_params
+    params.require(:showing).permit(:date, :showtime, :movie_id, :auditorium_id)
+  end
 end

@@ -1,29 +1,20 @@
 class AuditoriaController < ApplicationController
   before_action :set_auditorium, only: [:show, :edit, :update, :destroy]
 
-  # GET /auditoria
-  # GET /auditoria.json
   def index
-    @auditoria = Auditorium.all
-    @auditoria = @auditoria.sort
+    @auditoria = Auditorium.order(num: :asc)
   end
 
-  # GET /auditoria/1
-  # GET /auditoria/1.json
   def show
   end
 
-  # GET /auditoria/new
   def new
     @auditorium = Auditorium.new
   end
 
-  # GET /auditoria/1/edit
   def edit
   end
 
-  # POST /auditoria
-  # POST /auditoria.json
   def create
     @auditorium = Auditorium.new(auditorium_params)
 
@@ -38,14 +29,12 @@ class AuditoriaController < ApplicationController
     end
   end
 
-  # PATCH/PUT /auditoria/1
-  # PATCH/PUT /auditoria/1.json
   def update
-    @showings = @auditorium.showings
+    @showings = @auditorium.showings.by_showtime
     respond_to do |format|
       if @auditorium.update(auditorium_params)
         @showings.each do |showing|
-            new_seats = @auditorium.capacity - showing.show_orders.count
+            new_seats = @auditorium.capacity - showing.orders.count
             showing.update_column(:avail_seats, new_seats)
         end
         format.html { redirect_to @auditorium, notice: 'Auditorium was successfully updated.' }
@@ -57,8 +46,6 @@ class AuditoriaController < ApplicationController
     end
   end
 
-  # DELETE /auditoria/1
-  # DELETE /auditoria/1.json
   def destroy
     @auditorium.destroy
     respond_to do |format|
@@ -68,13 +55,12 @@ class AuditoriaController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_auditorium
-      @auditorium = Auditorium.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def auditorium_params
-      params.require(:auditorium).permit(:capacity)
-    end
+  def set_auditorium
+    @auditorium = Auditorium.find(params[:id])
+  end
+
+  def auditorium_params
+    params.require(:auditorium).permit(:capacity, :number)
+  end
 end
