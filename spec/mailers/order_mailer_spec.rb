@@ -1,21 +1,21 @@
 require "spec_helper"
 
 RSpec.describe OrderMailer, type: :mailer do
-
 	before(:each) do
 		@movie = FactoryGirl.create(:movie)
-  		@showing = FactoryGirl.create(:showing)
+  	@showing = FactoryGirl.create(:showing)
  		@order = FactoryGirl.create(:order)
     ActionMailer::Base.delivery_method = :test
     @mail = described_class.order_receipt(@order).deliver_now
   end
+
   after(:each) do
     order = Order.find_by_cust_email("clearviewcinemas16@gmail.com")
-    if !order.nil?
-      	order.destroy
-        @order.destroy
-        @showing.destroy
-        @movie.destroy
+    if order.present?
+    	order.destroy
+      @order.destroy
+      @showing.destroy
+      @movie.destroy
     end
   end
   
@@ -29,7 +29,7 @@ RSpec.describe OrderMailer, type: :mailer do
   	end
 
   	it 'renders the sender email' do
-  		expect(@mail.from).to eq(["clearviewcinemas16@gmail.com"])
+  		expect(@mail.from).to eq(['clearviewcinemas16@gmail.com'])
   	end
 
   	it 'assigns the first name' do
@@ -41,13 +41,11 @@ RSpec.describe OrderMailer, type: :mailer do
   	end
 
   	it 'assigns the showtime' do
-  		expect(@mail.body.encoded).to match(@showing.showtime.strftime("%A, %D"))
+  		expect(@mail.body.encoded).to match(@showing.showtime.strftime('%A, %D'))
   	end
 
   	it 'assigns the showtime' do
-  		expect(@mail.body.encoded).to match(@showing.showtime.strftime("%l:%M %p"))
+  		expect(@mail.body.encoded).to match(@showing.showtime.strftime('%l:%M %p'))
   	end
-
-
   end
 end

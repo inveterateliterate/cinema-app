@@ -1,38 +1,35 @@
-
 <div class="container">
+  <p id="notice">You have successfully purchased a ticket! Please review your information below. An email confirmation will be sent to you for your records.</p>
 
-<p id="notice">You have successfully purchased a ticket! Please review your information below. An email confirmation will be sent to you for your records.</p>
+  <p><strong>CUSTOMER DETAILS:</strong></p>
 
-<p><strong>CUSTOMER DETAILS:</strong></p>
+  <p>
+    <strong>Name:</strong>
+    <%= @order.customer_name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= "#{@order.cust_first} #{@order.cust_last}" %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @order.cust_email %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @order.cust_email %>
-</p>
+  <p><strong>TICKET DETAILS:</strong></p>
 
-<p><strong>TICKET DETAILS:</strong></p>
+  <p>
+    <strong>Movie:</strong>
+    <%= @movie.title %>
+  </p>
 
-<p>
-  <strong>Movie:</strong>
-  <%= @movie.title %>
-</p>
+  <p>
+    <strong>Showtime:</strong>
+    <%= "#{@showing.showtime.strftime("%A, %D")} at #{@showing.showtime.strftime("%l:%M %p")}" %>
+  </p>
 
-<p>
-  <strong>Showtime:</strong>
-  <%= "#{@showing.showtime.strftime("%A, %D")} at  #{@showing.showtime.strftime("%l:%M %p")}" %>
-</p>
+  <p>
+    <strong>Price:</strong>
+    $8.00
+  </p>
 
-<p>
-  <strong>Price:</strong>
-  $8.00
-</p>
-
-<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-<%= link_to 'Back to Showings', root_path %>
-
+  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+  <%= link_to 'Back to Showings', root_path %>
 </div>

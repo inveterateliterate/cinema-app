@@ -18,7 +18,7 @@
 <div class="container">
   <div class="form-group">
   <%= form_for(@showing) do |f| %>
-  <%= f.hidden_field :date, value: @date %>
+  <%= f.hidden_field :date, value: Date.today %>
   
   <div class="row">
     <div class="col-xs-2">
