@@ -1,1 +1,1 @@
-json.partial! "showings/showing", showing: @showing
+json.partial! 'showings/showing', showing: @showing

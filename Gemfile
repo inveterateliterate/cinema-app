@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # gem 'bcrypt', '~> 3.1.7'
 gem 'aws-sdk', '~> 2.6'
 gem 'bootstrap-datepicker-rails'
@@ -26,18 +25,22 @@ gem 'validates_timeliness', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'rspec'
-  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'pry-rails'
+  gem 'rubocop'
 end
 
 group :development do
   gem 'web-console'
+  gem 'bullet'
 end
 
 group :test do
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'rails-controller-testing'	
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'spring'
 end

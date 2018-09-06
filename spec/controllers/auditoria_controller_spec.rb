@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe AuditoriaController, type: :controller do
   before(:each) do
-     @auditorium = Auditorium.create(capacity: 50)
+    @auditorium = Auditorium.create(capacity: 50)
   end
 
   after(:each) do
@@ -15,15 +15,15 @@ RSpec.describe AuditoriaController, type: :controller do
       expect(response.success?).to be(true)
     end
 
-  	it 'renders the index template' do
+    it 'renders the index template' do
       get :index
       expect(response).to render_template('index')
-  	end
+    end
 
-  	it 'populates an instance variable @auditoria with all auditoria in the database' do
-  		get :index
-  		expect(assigns[:auditoria]).to eq(Auditorium.all)
-  	end
+    it 'populates an instance variable @auditoria with all auditoria in the database' do
+      get :index
+      expect(assigns[:auditoria]).to eq(Auditorium.all)
+    end
   end
 
   describe 'GET new' do
@@ -53,22 +53,22 @@ RSpec.describe AuditoriaController, type: :controller do
       auditorium.destroy if auditorium.present?
     end
 
-  	it 'responds with a redirect' do
+    it 'responds with a redirect' do
       post :create, auditorium: @auditorium_hash
       expect(response.redirect?).to be(true) 
-  	end
+    end
 
     it 'creates an auditorium' do
       post :create, auditorium: @auditorium_hash  
       expect(Auditorium.find_by_capacity(400).present?).to be(true)
     end
 
-  	it 'redirects to the show view' do
+    it 'redirects to the show view' do
       post :create, auditorium: @auditorium_hash
       expect(response).to redirect_to(auditorium_url(assigns(:auditorium)))
-  	end
+    end
 
-  	it 'redisplays new form on error' do
+    it 'redisplays new form on error' do
       @auditorium_hash[:capacity] = nil
       post :create, auditorium: @auditorium_hash
       expect(response).to render_template(:new)
@@ -87,8 +87,8 @@ RSpec.describe AuditoriaController, type: :controller do
   #  end
 
     it 'responds with success' do
-  	  get :edit, id: @auditorium.id
-  	  expect(response.success?).to be(true)
+      get :edit, id: @auditorium.id
+      expect(response.success?).to be(true)
     end
 
     it 'renders the edit view' do
@@ -103,7 +103,6 @@ RSpec.describe AuditoriaController, type: :controller do
   end
 
   describe 'PUT update' do
-
     before(:each) do
       @auditorium = Auditorium.last
       @auditorium_hash = { capacity: 500 }
@@ -126,16 +125,16 @@ RSpec.describe AuditoriaController, type: :controller do
       expect(response).to redirect_to(auditorium_path(assigns(:auditorium)))
     end
 
-  	it 'assigns the @errors instance variable on error' do
+    it 'assigns the @errors instance variable on error' do
       @auditorium_hash[:capacity] = ''
       put :update, auditorium: @auditorium_hash, id: @auditorium.id
       expect(assigns[:auditorium].errors.any?).to be(true)
-  	end
+    end
 
-  	it "re-renders the 'edit' template" do
+    it "re-renders the 'edit' template" do
       @auditorium_hash[:capacity] = ''
       put :update, auditorium: @auditorium_hash, id: @auditorium.id
       expect(response).to render_template(:edit)
-  	end
+    end
   end
 end

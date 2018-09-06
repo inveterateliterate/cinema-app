@@ -19,7 +19,7 @@ class ShowingsController < ApplicationController
   end
   
   def homepage
-    @date = Date.today.strftime("%B %-d, %Y")
+    @date = Date.today.strftime('%B %-d, %Y')
   end
 
   def showdates

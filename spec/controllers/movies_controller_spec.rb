@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe MoviesController, type: :controller do
-
   before(:each) do
-     @movie = FactoryGirl.create(:movie)
+    @movie = FactoryBot.create(:movie)
   end
 
   after(:each) do
@@ -16,15 +15,15 @@ RSpec.describe MoviesController, type: :controller do
       expect(response.success?).to be(true)
     end
 
-  	it 'renders the index template' do
+    it 'renders the index template' do
       get :index
       expect(response).to render_template('index')
-  	end
+    end
 
-  	it 'populates an instance variable @movie with all movie in the database' do
-  		get :index
-  		expect(assigns[:movies]).to eq(Movie.all)
-  	end
+    it 'populates an instance variable @movie with all movie in the database' do
+      get :index
+      expect(assigns[:movies]).to eq(Movie.all)
+    end
   end
 
   describe 'GET new' do
@@ -60,22 +59,22 @@ RSpec.describe MoviesController, type: :controller do
       movie.destroy if movie.present?
     end
 
-  	it 'responds with a redirect' do
+    it 'responds with a redirect' do
       post :create, movie: @movie_hash
       expect(response.redirect?).to be(true) 
-  	end
+    end
 
-  	it 'creates an movie' do
+    it 'creates an movie' do
       post :create, movie: @movie_hash  
       expect(Movie.find_by_title('Princess Bride').present?).to be(true)
     end
 
-  	it 'redirects to the show view' do
+    it 'redirects to the show view' do
       post :create, movie: @movie_hash
       expect(response).to redirect_to(movie_url(assigns[:movie]))
-  	end
+    end
 
-  	it 'redisplays new form on error' do
+    it 'redisplays new form on error' do
       @movie_hash.delete(:title)
       post :create, movie: @movie_hash
       expect(response).to render_template(:new)
@@ -94,8 +93,8 @@ RSpec.describe MoviesController, type: :controller do
     end
 
     it 'responds with success' do
-  	  get :edit, id: @movie.id
-  	  expect(response.success?).to be(true)
+      get :edit, id: @movie.id
+      expect(response.success?).to be(true)
     end
 
     it 'renders the edit view' do
@@ -138,16 +137,16 @@ RSpec.describe MoviesController, type: :controller do
       expect(response).to redirect_to(movie_path(assigns(:movie)))
     end
 
-  	it 'assigns the @errors instance variable on error' do
+    it 'assigns the @errors instance variable on error' do
       @movie_hash[:title] = ''
       put :update, movie: @movie_hash, id: @movie.id
       expect(assigns[:movie].errors.any?).to be(true)
-  	end
+    end
 
-  	it "re-renders the 'edit' template" do
-       @movie_hash[:title] = ''
+    it "re-renders the 'edit' template" do
+      @movie_hash[:title] = ''
       put :update, movie: @movie_hash, id: @movie.id
-       expect(response).to render_template(:edit)
-  	end
+      expect(response).to render_template(:edit)
+    end
   end
 end

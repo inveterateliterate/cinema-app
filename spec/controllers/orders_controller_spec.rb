@@ -1,17 +1,16 @@
 require 'spec_helper'
 
 RSpec.describe OrdersController, type: :controller do
-
   before(:each) do
-    @movie = FactoryGirl.create(:movie)
-    @showing = FactoryGirl.create(:showing)
-    @order = FactoryGirl.create(:order) 
+    @movie = FactoryBot.create(:movie)
+    @showing = FactoryBot.create(:showing)
+    @order = FactoryBot.create(:order) 
   end
 
   after(:each) do
     if @order.present?
       @order.destroy
-      #@showing.destroy
+      # @showing.destroy
       @movie.destroy
     end
   end
@@ -22,15 +21,15 @@ RSpec.describe OrdersController, type: :controller do
       expect(response.success?).to be(true)
     end
 
-  	it 'renders the index template' do
+    it 'renders the index template' do
       get :index
       expect(response).to render_template('index')
-  	end
+    end
 
-  	it 'populates an instance variable @orders with all orders in the database' do
-  		get :index
-  		expect(assigns[:orders]).to eq(Order.all)
-  	end
+    it 'populates an instance variable @orders with all orders in the database' do
+      get :index
+      expect(assigns[:orders]).to eq(Order.all)
+    end
   end
 
   describe 'GET new' do
@@ -52,13 +51,14 @@ RSpec.describe OrdersController, type: :controller do
 
   describe 'POST create' do
     before(:each) do
+      # FactoryBot
       @order_hash = { 
         cust_first: 'Suzy',
         cust_last: 'Q',
-        cust_email: 'clearviewcinemas16@gmail.com',
+        cust_email: ENV['GMAIL_USERNAME'],
         showing_id: 1,
-        cc_num: 1234567891011121,
-        cc_exp: Date.today+1,
+        cc_num: Faker::Business.credit_card_number,
+        cc_exp: Date.today + 1,
         sale: 8.00
       } 
       ActionMailer::Base.delivery_method = :test
@@ -72,27 +72,27 @@ RSpec.describe OrdersController, type: :controller do
       ActionMailer::Base.deliveries.clear
     end
 
-  	it 'responds with a redirect' do
+    it 'responds with a redirect' do
       post :create, order: @order_hash
       expect(response.redirect?).to be(true) 
-  	end
+    end
 
-  	it 'creates an order' do
+    it 'creates an order' do
       post :create, order: @order_hash  
       expect(Order.find_by_cust_email('clearviewcinemas16@gmail.com').present?).to be(true)
     end
 
     it 'sends an email to the customer' do
-      post :create, order:@order_hash
+      post :create, order: @order_hash
       expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
-  	it 'redirects to the show view' do
+    it 'redirects to the show view' do
       post :create, order: @order_hash
       expect(response).to redirect_to(order_url(assigns[:order]))
-  	end
+    end
 
-  	it 'redisplays new form on error' do
+    it 'redisplays new form on error' do
       @order_hash.delete(:cust_first)
       post :create, order: @order_hash
       expect(response).to render_template(:new)
@@ -145,7 +145,6 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "PUT update" do
-
     before(:each) do
       @order = Order.last
       @order_hash = { 
@@ -154,39 +153,39 @@ RSpec.describe OrdersController, type: :controller do
           cust_email: "suzyq@gmail.com",
           showing_id: 1,
           cc_num: 1234567891011121,
-          cc_exp: Date.today+1,
+          cc_exp: Date.today + 1,
           sale: 8.00
         }  
     end
 
-      it 'responds with a redirect' do
-        put :update, order: @order_hash, id: @order.id
-        expect(response.redirect?).to be(true)
-      end
-     
-      it 'updates an order' do
-        put :update, order: @order_hash, id: @order.id
-        @order.reload
-        expect(@order.cust_first).to eq(@order_hash[:cust_first])
-      end
-    
-      it 'redirects to the show view' do
-        put :update, order: @order_hash, id: @order.id
-        @order.reload
-        expect(response).to redirect_to(order_path(assigns(:order)))
-      end
+    it 'responds with a redirect' do
+      put :update, order: @order_hash, id: @order.id
+      expect(response.redirect?).to be(true)
+    end
+   
+    it 'updates an order' do
+      put :update, order: @order_hash, id: @order.id
+      @order.reload
+      expect(@order.cust_first).to eq(@order_hash[:cust_first])
+    end
+  
+    it 'redirects to the show view' do
+      put :update, order: @order_hash, id: @order.id
+      @order.reload
+      expect(response).to redirect_to(order_path(assigns(:order)))
+    end
 
-    	it 'assigns the @errors instance variable on error' do
-        @order_hash[:cust_first] = ""
-        put :update, order: @order_hash, id: @order.id
-        expect(assigns[:order].errors.any?).to be(true)
-    	end
+  	it 'assigns the @errors instance variable on error' do
+      @order_hash[:cust_first] = ""
+      put :update, order: @order_hash, id: @order.id
+      expect(assigns[:order].errors.any?).to be(true)
+  	end
 
-    	it "re-renders the 'edit' template" do
-         @order_hash[:cust_first] = ""
-        put :update, order: @order_hash, id: @order.id
-         expect(response).to render_template(:edit)
-    	end
+  	it "re-renders the 'edit' template" do
+       @order_hash[:cust_first] = ""
+      put :update, order: @order_hash, id: @order.id
+       expect(response).to render_template(:edit)
+  	end
   end
 =end
 end

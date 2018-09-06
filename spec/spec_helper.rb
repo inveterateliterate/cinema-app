@@ -11,10 +11,10 @@ RSpec.configure do |config|
     Rails.application.load_seed
   end
 
-  Shoulda::Matchers.configure do |config|
-  	config.integrate do |with|
-  		with.test_framework :rspec
-  		with.library :rails
-  	end
+  Shoulda::Matchers.configure do |c|
+    c.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
   end
 end

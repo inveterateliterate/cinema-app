@@ -34,8 +34,8 @@ class AuditoriaController < ApplicationController
     respond_to do |format|
       if @auditorium.update(auditorium_params)
         @showings.each do |showing|
-            new_seats = @auditorium.capacity - showing.orders.count
-            showing.update_column(:avail_seats, new_seats)
+          new_seats = @auditorium.capacity - showing.orders.count
+          showing.update_column(:avail_seats, new_seats)
         end
         format.html { redirect_to @auditorium, notice: 'Auditorium was successfully updated.' }
         format.json { render :show, status: :ok, location: @auditorium }

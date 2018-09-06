@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe ShowingsController, type: :controller do
   before(:each) do
-     @showing = FactoryGirl.create(:showing)
+    @showing = FactoryBot.create(:showing)
   end
 
   after(:each) do
@@ -15,15 +15,15 @@ RSpec.describe ShowingsController, type: :controller do
       expect(response.success?).to be(true)
     end
 
-  	it 'renders the index template' do
+    it 'renders the index template' do
       get :index
       expect(response).to render_template('index')
-  	end
+    end
 
-  	it 'populates an instance variable @showings with all showings in the database' do
-		  get :index
-		  expect(assigns[:showings]).to eq(Showing.all.sort_by {|x| x.showtime })
-	  end
+    it 'populates an instance variable @showings with all showings in the database' do
+      get :index
+      expect(assigns[:showings]).to eq(Showing.all.sort_by {|x| x.showtime })
+    end
   end
 
   describe 'GET homepage' do
@@ -45,18 +45,18 @@ RSpec.describe ShowingsController, type: :controller do
 
   describe 'GET showdates' do
     it 'responds with success' do
-      get :showdates, date: (Date.today+1).strftime('%B %-d, %Y')
+      get :showdates, date: (Date.today + 1).strftime('%B %-d, %Y')
       expect(response.success?).to be(true)
     end
 
     it 'renders the showdates template' do
-      get :showdates, date: (Date.today+1).strftime('%B %-d, %Y')
+      get :showdates, date: (Date.today + 1).strftime('%B %-d, %Y')
       expect(response).to render_template('showdates')
     end
 
     it 'populates an instance variable @date with the selected date' do
-      get :showdates, date: (Date.today+1).strftime('%B %-d, %Y')
-      expect(assigns[:date]).to eq((Date.today+1).strftime('%B %-d, %Y'))
+      get :showdates, date: (Date.today + 1).strftime('%B %-d, %Y')
+      expect(assigns[:date]).to eq((Date.today + 1).strftime('%B %-d, %Y'))
     end
   end
 
@@ -84,7 +84,7 @@ RSpec.describe ShowingsController, type: :controller do
         showtime: Time.now,
         movie_id: 1,
         auditorium_id: 1,
-        #avail_seats: 80
+        # avail_seats: 80
       }     
     end
 
@@ -93,22 +93,22 @@ RSpec.describe ShowingsController, type: :controller do
       showing.destroy if showing.present?
     end
 
-  	it 'responds with a redirect' do
+    it 'responds with a redirect' do
       post :create, showing: @showing_hash
       expect(response.redirect?).to be(true) 
-  	end
+    end
 
-  	it 'creates a showing' do
+    it 'creates a showing' do
       post :create, showing: @showing_hash  
       expect(Showing.find_by_movie_id(1).present?).to be(true)
     end
 
-  	it 'redirects to the show view' do
+    it 'redirects to the show view' do
       post :create, showing: @showing_hash
       expect(response).to redirect_to(showing_url(assigns[:showing]))
-  	end
+    end
 
-  	it 'redisplays new form on error' do
+    it 'redisplays new form on error' do
       @showing_hash.delete(:movie_id)
       post :create, showing: @showing_hash
       expect(response).to render_template(:new)
@@ -127,8 +127,8 @@ RSpec.describe ShowingsController, type: :controller do
     end
 
     it 'responds with success' do
-  	  get :edit, id: @showing.id
-  	  expect(response.success?).to be(true)
+      get :edit, id: @showing.id
+      expect(response.success?).to be(true)
     end
 
     it 'renders the edit view' do
@@ -171,16 +171,16 @@ RSpec.describe ShowingsController, type: :controller do
       expect(response).to redirect_to(showing_path(assigns(:showing)))
     end
 
-  	it 'assigns the @errors instance variable on error' do
+    it 'assigns the @errors instance variable on error' do
       @showing_hash[:movie_id] = ''
       put :update, showing: @showing_hash, id: @showing.id
       expect(assigns[:showing].errors.any?).to be(true)
-  	end
+    end
 
-  	it "re-renders the 'edit' template" do
+    it "re-renders the 'edit' template" do
       @showing_hash[:movie_id] = ''
       put :update, showing: @showing_hash, id: @showing.id
       expect(response).to render_template(:edit)
-  	end
+    end
   end
 end
