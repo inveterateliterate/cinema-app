@@ -131,7 +131,7 @@ describe "PUT update" do
       expect(response.redirect?).to be(true)
     end
    
-    it 'updates an movie' do
+    it 'updates a movie' do
       put :update, movie: @movie_hash, id: @movie.id
       @movie.reload
       expect(@movie.title).to eq(@movie_hash[:title])
